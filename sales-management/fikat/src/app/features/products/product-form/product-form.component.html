@@ -1,0 +1,96 @@
+<p>product-form works!</p>
+ <div class="card">
+        <h2>Add Product</h2>
+
+        <form>
+            <div>
+                <label>Product Name</label>
+                <input type="text" placeholder="Enter product name">
+            </div>
+
+            <div>
+                <label>Category</label>
+                <select>
+                    <option>Select Category</option>
+                    <option>Electronics</option>
+                    <option>Clothes</option>
+                    <option>Home Appliances</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Price</label>
+                <input type="number" placeholder="Enter price">
+            </div>
+
+            <div>
+                <label>Stock Quantity</label>
+                <input type="number" placeholder="Enter quantity">
+            </div>
+
+            <div style="grid-column: span 2;">
+                <label>Description</label>
+                <textarea rows="3" placeholder="Enter product description"></textarea>
+            </div>
+
+            <div style="grid-column: span 2;">
+                <button type="submit">Add Product</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- PRODUCT LIST TABLE -->
+    <div class="card">
+        <h2>Product List</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Samsung TV</td>
+                    <td>Electronics</td>
+                    <td>$400</td>
+                    <td>20</td>
+                    <td>
+                        <button style="background:#27ae60;">Edit</button>
+                        <button style="background:#e74c3c;">Delete</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Nike Shoes</td>
+                    <td>Clothes</td>
+                    <td>$90</td>
+                    <td>50</td>
+                    <td>
+                        <button style="background:#27ae60;">Edit</button>
+                        <button style="background:#e74c3c;">Delete</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Air Conditioner</td>
+                    <td>Home Appliances</td>
+                    <td>$300</td>
+                    <td>10</td>
+                    <td>
+                        <button style="background:#27ae60;">Edit</button>
+                        <button style="background:#e74c3c;">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-product-form',
-  standalone: false,
+  standalone: true,
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css'
 })
