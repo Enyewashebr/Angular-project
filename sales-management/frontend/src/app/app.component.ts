@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { CustomerFormComponent } from './features/customers/customer-form/customer-form.component';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './Header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+// import { ProductsComponent } from './features/products/products.component';
+// import { DashboardComponent } from './dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CustomerFormComponent], 
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent],
   templateUrl: './app.component.html',
-  standalone: true,
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'fikat';
 }

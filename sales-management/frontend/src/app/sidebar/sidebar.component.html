@@ -1,0 +1,36 @@
+<div class="sidebar">
+  <h2 class="logo">Admin Panel</h2>
+
+  <a routerLink="/dashboard" routerLinkActive="active">
+    Dashboard
+  </a>
+
+  <!-- Products (hover submenu) -->
+  <div class="menu-item">
+    <div  class="has-submenu" >
+      <p>Products</p>
+      <p class="arrow">&gt;</p>
+    </div>
+
+    <div class="submenu">
+      <a routerLink="/products/add" routerLinkActive="active">
+        Product Form
+      </a>
+      <a routerLink="/products/list" routerLinkActive="active">
+        Product List
+      </a>
+    </div>
+  </div>
+
+  <a routerLink="/customers" routerLinkActive="active">
+    Customers
+  </a>
+
+  <a routerLink="/orders" routerLinkActive="active">
+    Orders
+  </a>
+
+  <a routerLink="/reports" routerLinkActive="active">
+    Reports
+  </a>
+</div>
