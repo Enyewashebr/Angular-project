@@ -24,6 +24,10 @@ export class ProductService {
     return this.products$.asObservable();
   }
 
+  getCurrent(): Product[] {
+    return this.products$.getValue();
+  }
+
   getById(id: number): Product | undefined {
     return this.products$.getValue().find(p => p.id === id);
   }
