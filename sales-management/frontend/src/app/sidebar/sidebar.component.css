@@ -54,28 +54,18 @@
   transform: rotate(90deg);
 }
 
-/* Submenu */
+/* Submenu (shown via *ngIf) */
 .submenu {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 180px;
+  display: block;
+  position: static;
+  margin-left: 12px;
   background-color: #111827;
   border-radius: 6px;
-  padding: 5px 0;
-  /* display: block; */
-  padding: 15px;
+  padding: 8px 0;
   color: #d1d5db;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.menu-item:checked .submenu {
-  display: block;
 }
 
 .submenu a {
-  padding: 10px;
+  padding: 8px 12px;
   font-size: 14px;
 }

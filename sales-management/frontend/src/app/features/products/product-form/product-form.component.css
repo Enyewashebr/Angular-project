@@ -55,6 +55,11 @@ body {
             background: #2980b9;
         }
 
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+        }
+
         /* Table */
         table {
             width: 100%;

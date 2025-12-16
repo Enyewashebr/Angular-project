@@ -1,1 +1,33 @@
-<p>product-list works!</p>
+<div class="card">
+  <div class="header-row">
+    <h2>Product List</h2>
+    <a class="btn primary" routerLink="/products/add">Add Product</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of (products$ | async); let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.category }}</td>
+        <td>${{ p.price | number:'1.2-2' }}</td>
+        <td>{{ p.stock }}</td>
+        <td class="actions">
+          <a class="btn small" [routerLink]="['/products/edit', p.id]">Edit</a>
+          <button class="btn small danger" (click)="delete(p.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

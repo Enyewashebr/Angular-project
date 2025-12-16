@@ -1,36 +1,61 @@
 <div class="sidebar">
   <h2 class="logo">Admin Panel</h2>
 
-  <a routerLink="/dashboard" routerLinkActive="active">
+  <a routerLink="/dashboard" routerLinkActive="active" >
     Dashboard
   </a>
 
   <!-- Products (hover submenu) -->
-  <div class="menu-item">
-    <div  class="has-submenu" >
-      <p>Products</p>
-      <p class="arrow">&gt;</p>
+  <div class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+    <div class="has-submenu" (click)="toggleMenu('products')">
+      <span>Products</span>
+      <span class="arrow">{{ productsOpen ? '▼' : '▶' }}</span>
     </div>
 
-    <div class="submenu">
-      <a routerLink="/products/add" routerLinkActive="active">
+    <div class="submenu" *ngIf="productsOpen">
+      <a routerLink="/products/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         Product Form
       </a>
-      <a routerLink="/products/list" routerLinkActive="active">
+      <a routerLink="/products/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         Product List
       </a>
     </div>
   </div>
 
-  <a routerLink="/customers" routerLinkActive="active">
-    Customers
-  </a>
+  <div class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+    <div class="has-submenu" (click)="toggleMenu('customers')">
+      <span>Customers</span>
+      <span class="arrow">{{ customersOpen ? '▼' : '▶' }}</span>
+    </div>
+    <div class="submenu" *ngIf="customersOpen">
+      <a routerLink="/customers/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Customer Form
+      </a>
+      <a routerLink="/customers/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Customer List
+      </a>
+    </div>
+  </div>
 
-  <a routerLink="/orders" routerLinkActive="active">
-    Orders
-  </a>
+  <div class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+    <div class="has-submenu" (click)="toggleMenu('orders')">
+      <span>Orders</span>
+      <span class="arrow">{{ ordersOpen ? '▼' : '▶' }}</span>
+    </div>
+    <div class="submenu" *ngIf="ordersOpen">
+      <a routerLink="/orders/create" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        New Order
+      </a>
+      <a routerLink="/orders/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Orders List
+      </a>
+    </div>
+  </div>
 
   <a routerLink="/reports" routerLinkActive="active">
     Reports
   </a>
+
+  
 </div>
+<!-- <RouterOutlet></RouterOutlet> -->
