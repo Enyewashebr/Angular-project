@@ -1,0 +1,19 @@
+/* Matches Product List layout */
+.search-row {
+  display: flex;
+  margin: 10px 0 12px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 520px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}

@@ -1,7 +1,89 @@
-<div class="card">
+<div class="card" *ngIf="vm$ | async as vm">
   <div class="header-row">
-    <h2>Reports</h2>
+    <h2>Sales Reports</h2>
+    <button type="button" class="btn primary" (click)="downloadPdf(vm)">Download PDF</button>
   </div>
 
-  <p class="muted">This page is responsive and ready for report content.</p>
+  <div class="filters">
+    <div class="mode">
+      <label class="muted">Mode</label>
+      <div class="mode-buttons">
+        <button type="button" class="btn small" [class.primary]="vm.mode === 'daily'" (click)="setMode('daily')">Daily</button>
+        <button type="button" class="btn small" [class.primary]="vm.mode === 'monthly'" (click)="setMode('monthly')">Monthly</button>
+      </div>
+    </div>
+
+    <div *ngIf="vm.mode === 'daily'">
+      <label class="muted">Date</label>
+      <input type="date" [value]="vm.dateKey" (change)="setDateKey(($any($event.target).value))" />
+    </div>
+
+    <div *ngIf="vm.mode === 'monthly'">
+      <label class="muted">Month</label>
+      <input type="month" [value]="vm.monthKey" (change)="setMonthKey(($any($event.target).value))" />
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-card">
+      <div class="muted">Orders</div>
+      <div class="big">{{ vm.ordersCount }}</div>
+    </div>
+    <div class="summary-card">
+      <div class="muted">Items Sold</div>
+      <div class="big">{{ vm.totalItems }}</div>
+    </div>
+    <div class="summary-card">
+      <div class="muted">Total Sales</div>
+      <div class="big">${{ vm.totalSales | number:'1.2-2' }}</div>
+    </div>
+  </div>
+
+  <p class="muted" *ngIf="!vm.ordersCount">No sales data for the selected period.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product</th>
+          <th>Qty Sold</th>
+          <th>Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of vm.byProduct; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ r.productName }}</td>
+          <td>{{ r.quantity }}</td>
+          <td>${{ r.revenue | number:'1.2-2' }}</td>
+        </tr>
+        <tr *ngIf="!vm.byProduct.length">
+          <td colspan="4" class="muted">No product sales.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-wrap" *ngIf="vm.ordersCount">
+    <h3>Orders</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of vm.orders">
+          <td>#{{ o.id }}</td>
+          <td>{{ o.createdAt | date:'medium' }}</td>
+          <td>{{ o.customerName }}</td>
+          <td>${{ o.total | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

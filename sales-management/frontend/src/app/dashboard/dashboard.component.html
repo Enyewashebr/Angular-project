@@ -1,42 +1,62 @@
-<div class="container">
-<!-- MAIN CONTENT -->
-<div class="main">
-    <h1>Dashboard</h1>
-    <br>
+<div class="card" *ngIf="vm$ | async as vm">
+  <div class="header-row">
+    <h2>Dashboard</h2>
+    <span class="muted">Today: {{ vm.todayKey }} · Month: {{ vm.monthKey }}</span>
+  </div>
 
-    <!-- PRODUCT CARDS -->
-    <div class="cards">
-
-        <div class="card">
-            <img src="https://via.placeholder.com/300x150" alt="Product">
-            <h3>Smart Phone</h3>
-            <p>Latest model smartphone with advanced features.</p>
-            <div class="price">$500</div>
-            <button>View Product</button>
-        </div>
-
-        <div class="card">
-            <img src="https://via.placeholder.com/300x150" alt="Product">
-            <h3>Laptop</h3>
-            <p>High performance laptop for work and gaming.</p>
-            <div class="price">$900</div>
-            <button>View Product</button>
-        </div>
-
-        <div class="card">
-            <img src="https://via.placeholder.com/300x150" alt="Product">
-            <h3>Headphones</h3>
-            <p>Noise cancelling wireless headphones.</p>
-            <div class="price">$120</div>
-            <button>View Product</button>
-        </div>
-
-        <div class="card">
-            <img src="https://via.placeholder.com/300x150" alt="Product">
-            <h3>Smart Watch</h3>
-            <p>Fitness tracking smart watch.</p>
-            <div class="price">$150</div>
-            <button>Edit Product</button>
-        </div>
+  <div class="kpis">
+    <div class="kpi">
+      <div class="muted">Sales (Today)</div>
+      <div class="big">${{ vm.salesToday | number:'1.2-2' }}</div>
+      <div class="muted">{{ vm.ordersToday }} orders</div>
     </div>
+    <div class="kpi">
+      <div class="muted">Sales (This Month)</div>
+      <div class="big">${{ vm.salesMonth | number:'1.2-2' }}</div>
+      <div class="muted">{{ vm.ordersMonth }} orders</div>
+    </div>
+    <div class="kpi">
+      <div class="muted">Top Product (This Month)</div>
+      <div class="big">{{ vm.topProducts.length ? vm.topProducts[0].productName : '—' }}</div>
+      <div class="muted" *ngIf="vm.topProducts.length">
+        {{ vm.topProducts[0].quantity }} sold · ${{ vm.topProducts[0].revenue | number:'1.2-2' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Most Sold Products (This Month)</h3>
+      <p class="muted" *ngIf="!vm.topProducts.length">No sales yet. Create an order to see analytics.</p>
+
+      <div class="table-wrap" *ngIf="vm.topProducts.length">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product</th>
+              <th>Qty Sold</th>
+              <th>Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of vm.topProducts; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ p.productName }}</td>
+              <td>{{ p.quantity }}</td>
+              <td>${{ p.revenue | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Sales Distribution (Qty Sold)</h3>
+      <p class="muted">Pie chart shows product share for this month.</p>
+      <div class="chart-wrap">
+        <canvas #topProductsChart></canvas>
+      </div>
+    </div>
+  </div>
 </div>

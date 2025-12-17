@@ -1,1 +1,79 @@
-<p>customer-form works!</p>
+<div class="card">
+  <div class="header-row">
+    <h2>Add Customer</h2>
+    <a class="btn primary" routerLink="/customers/list">Go to Customer List</a>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label>Full Name</label>
+      <input type="text" formControlName="name" placeholder="Enter customer name" />
+      <small class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        Name is required (min 2 characters).
+      </small>
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Enter customer email" />
+      <small class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        Enter a valid email.
+      </small>
+    </div>
+
+    <div>
+      <label>Phone Number</label>
+      <input type="tel" formControlName="phone" placeholder="Enter phone number" />
+      <small class="error" *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+        Enter a valid phone number.
+      </small>
+    </div>
+
+    <div>
+      <label>Company (optional)</label>
+      <input type="text" formControlName="company" placeholder="Company name (optional)" />
+    </div>
+
+    <div class="form-actions">
+      <button class="btn primary" type="submit">Save Customer</button>
+      <button class="btn" type="button" (click)="form.reset({ name: '', email: '', phone: '', company: '' })">Clear</button>
+    </div>
+  </form>
+</div>
+
+<div class="card" *ngIf="customers$ | async as customers">
+  <div class="header-row">
+    <h2>Customers (from the form)</h2>
+    <a class="btn" routerLink="/orders/create">Create Order</a>
+  </div>
+
+  <p class="muted" *ngIf="!customers.length">No customers yet. Add one using the form above.</p>
+
+  <div class="table-wrap" *ngIf="customers.length">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Company</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of customers; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ c.name }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.phone }}</td>
+          <td>{{ c.company || '-' }}</td>
+          <td class="actions">
+            <a class="btn small" [routerLink]="['/orders/create']" [queryParams]="{ customerId: c.id }">New Order</a>
+            <button class="btn small danger" type="button" (click)="deleteCustomer(c.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

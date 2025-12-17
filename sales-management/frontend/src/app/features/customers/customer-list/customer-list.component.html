@@ -1,1 +1,48 @@
+<div class="card" *ngIf="vm$ | async as vm">
+  <div class="header-row">
+    <h2>Customer List</h2>
+    <a class="btn primary" routerLink="/customers/add">Add Customer</a>
+  </div>
 
+  <div class="search-row">
+    <input
+      class="search-input"
+      type="text"
+      [value]="vm.q"
+      (input)="updateSearch(($any($event.target).value))"
+      placeholder="Search by name, email, phone, or company..."
+    />
+  </div>
+
+  <p class="muted" *ngIf="!vm.customers.length">No customers found.</p>
+
+  <div class="table-wrap" *ngIf="vm.customers.length">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Company</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of vm.customers; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ c.name }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.phone }}</td>
+          <td>{{ c.company || '-' }}</td>
+          <td>{{ c.createdAt | date:'mediumDate' }}</td>
+          <td class="actions">
+            <a class="btn small" [routerLink]="['/orders/create']" [queryParams]="{ customerId: c.id }">New Order</a>
+            <button class="btn small danger" type="button" (click)="deleteCustomer(c.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

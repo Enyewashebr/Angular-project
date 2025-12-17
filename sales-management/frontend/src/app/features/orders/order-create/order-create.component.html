@@ -1,1 +1,80 @@
-<p>order-create works!</p>
+<div class="card" *ngIf="vm$ | async as vm">
+  <div class="header-row">
+    <h2>New Order</h2>
+    <a class="btn" routerLink="/orders/list">Orders List</a>
+  </div>
+
+  <div class="muted" *ngIf="!vm.customers.length">
+    No customers found. Please <a routerLink="/customers/add">add a customer</a> first.
+  </div>
+  <div class="muted" *ngIf="!vm.products.length">
+    No products found. Please <a routerLink="/products/add">add a product</a> first.
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit(vm)">
+    <div>
+      <label>Customer</label>
+      <select formControlName="customerId">
+        <option [ngValue]="null">Select customer</option>
+        <option *ngFor="let c of vm.customers" [ngValue]="c.id">{{ c.name }} ({{ c.email }})</option>
+      </select>
+      <small class="error" *ngIf="form.get('customerId')?.touched && form.get('customerId')?.invalid">
+        Customer is required.
+      </small>
+    </div>
+
+    <div class="items-card">
+      <div class="header-row">
+        <h3>Order Items</h3>
+        <button class="btn" type="button" (click)="addItem()">Add Item</button>
+      </div>
+
+      <div formArrayName="items" class="items-grid">
+        <div class="item-row" *ngFor="let grp of itemsArray.controls; let i = index" [formGroupName]="i">
+          <div>
+            <label>Product</label>
+            <select formControlName="productId">
+              <option [ngValue]="null">Select product</option>
+              <option *ngFor="let p of vm.products" [ngValue]="p.id">
+                {{ p.name }} — ${{ p.price | number:'1.2-2' }} (stock {{ p.stock }})
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <label>Qty</label>
+            <input type="number" min="1" formControlName="quantity" />
+            <small class="error" *ngIf="vm.items[i] && !vm.items[i].stockOk && vm.items[i].stock !== null">
+              Not enough stock (available {{ vm.items[i].stock }}).
+            </small>
+          </div>
+
+          <div class="readonly">
+            <label>Unit Price</label>
+            <div class="value">${{ vm.items[i].unitPrice | number:'1.2-2' }}</div>
+          </div>
+
+          <div class="readonly">
+            <label>Line Total</label>
+            <div class="value">${{ vm.items[i].lineTotal | number:'1.2-2' }}</div>
+          </div>
+
+          <div class="row-actions">
+            <button class="btn danger small" type="button" (click)="removeItem(i)">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="totals">
+        <div class="muted">Total</div>
+        <div class="total">${{ vm.total | number:'1.2-2' }}</div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn primary" type="submit" [disabled]="!vm.canSubmit">Create Order</button>
+      <a class="btn" routerLink="/customers/add">Add Customer</a>
+      <a class="btn" routerLink="/products/add">Add Product</a>
+    </div>
+  </form>
+</div>

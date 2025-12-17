@@ -1,1 +1,48 @@
-<p>order-details works!</p>
+<div class="card" *ngIf="order$ | async as order; else notFound">
+  <div class="header-row">
+    <h2>Order #{{ order.id }}</h2>
+    <div class="actions">
+      <a class="btn" routerLink="/orders/list">Back to Orders</a>
+      <a class="btn primary" routerLink="/orders/create">New Order</a>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div><span class="muted">Created:</span> {{ order.createdAt | date:'medium' }}</div>
+    <div><span class="muted">Customer:</span> {{ order.customerName }} <span class="muted" *ngIf="order.customerEmail">({{ order.customerEmail }})</span></div>
+    <div><span class="muted">Total:</span> <strong>${{ order.total | number:'1.2-2' }}</strong></div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product</th>
+          <th>Unit Price</th>
+          <th>Qty</th>
+          <th>Line Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let it of order.items; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ it.productName }}</td>
+          <td>${{ it.unitPrice | number:'1.2-2' }}</td>
+          <td>{{ it.quantity }}</td>
+          <td>${{ it.lineTotal | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="card">
+    <div class="header-row">
+      <h2>Order not found</h2>
+      <a class="btn" routerLink="/orders/list">Back to Orders</a>
+    </div>
+    <p class="muted">The order you are looking for does not exist (or was deleted).</p>
+  </div>
+</ng-template>

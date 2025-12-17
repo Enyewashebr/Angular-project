@@ -1,1 +1,36 @@
-<p>order-list works!</p>
+<div class="card" *ngIf="orders$ | async as orders">
+  <div class="header-row">
+    <h2>Orders</h2>
+    <a class="btn primary" routerLink="/orders/create">New Order</a>
+  </div>
+
+  <p class="muted" *ngIf="!orders.length">No orders yet. Create your first order.</p>
+
+  <div class="table-wrap" *ngIf="orders.length">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of orders; let i = index">
+          <td>{{ o.id }}</td>
+          <td>{{ o.createdAt | date:'medium' }}</td>
+          <td>{{ o.customerName }}</td>
+          <td>{{ o.items.length }}</td>
+          <td>${{ o.total | number:'1.2-2' }}</td>
+          <td class="actions">
+            <a class="btn small" [routerLink]="['/orders/details', o.id]">View</a>
+            <button class="btn small danger" type="button" (click)="deleteOrder(o.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
