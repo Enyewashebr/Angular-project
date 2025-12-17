@@ -1,1 +1,72 @@
-<p>order-create works!</p>
+<div class="card">
+  <h2>Create New Order</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div style="grid-column: 1 / -1;">
+      <label>Customer</label>
+      <select formControlName="customerId">
+        <option [ngValue]="null">Select customer</option>
+        <option *ngFor="let c of (customers$ | async)" [ngValue]="c.id">
+          {{ c.name }} — {{ c.email }}
+        </option>
+      </select>
+      <small class="error" *ngIf="form.get('customerId')?.touched && form.get('customerId')?.invalid">
+        Customer is required.
+      </small>
+    </div>
+
+    <div class="items" formArrayName="items" style="grid-column: 1 / -1;">
+      <div class="items-header">
+        <h3>Items</h3>
+        <button type="button" class="btn small primary" (click)="addItem()">+ Add Item</button>
+      </div>
+
+      <div class="item-row" *ngFor="let row of items.controls; let i = index" [formGroupName]="i">
+        <div>
+          <label>Product</label>
+          <select formControlName="productId">
+            <option [ngValue]="null">Select product</option>
+            <option *ngFor="let p of (products$ | async)" [ngValue]="p.id">
+              {{ p.name }} (Stock: {{ p.stock }}) — ${{ p.price | number:'1.2-2' }}
+            </option>
+          </select>
+          <small class="error" *ngIf="row.get('productId')?.touched && row.get('productId')?.invalid">
+            Product is required.
+          </small>
+        </div>
+
+        <div>
+          <label>Quantity</label>
+          <input type="number" min="1" formControlName="quantity" />
+          <small class="error" *ngIf="row.get('quantity')?.touched && row.get('quantity')?.invalid">
+            Quantity must be at least 1.
+          </small>
+        </div>
+
+        <div class="line-total">
+          <label>Line Total</label>
+          <div class="money">
+            ${{ getLineTotal(row.get('productId')?.value, row.get('quantity')?.value) | number:'1.2-2' }}
+          </div>
+        </div>
+
+        <div class="item-actions">
+          <label>&nbsp;</label>
+          <button type="button" class="btn small danger" (click)="removeItem(i)">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary" style="grid-column: 1 / -1;">
+      <div class="total">
+        <span>Total</span>
+        <strong>${{ getOrderTotal() | number:'1.2-2' }}</strong>
+      </div>
+      <small class="error" *ngIf="error">{{ error }}</small>
+    </div>
+
+    <div style="grid-column: 1 / -1;">
+      <button type="submit">Create Order</button>
+    </div>
+  </form>
+</div>

@@ -1,1 +1,42 @@
-<p>order-details works!</p>
+<div class="card" *ngIf="vm$ | async as vm">
+  <div class="header-row">
+    <h2>Order Details</h2>
+    <a class="btn" routerLink="/orders/list">Back to Orders</a>
+  </div>
+
+  <div class="meta" *ngIf="vm.order; else notFound">
+    <div><strong>Order:</strong> #{{ vm.order.id }}</div>
+    <div><strong>Customer:</strong> {{ vm.customerName }}</div>
+    <div><strong>Date:</strong> {{ vm.createdAt | date:'medium' }}</div>
+  </div>
+
+  <table *ngIf="vm.order">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Unit Price</th>
+        <th>Line Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let it of vm.items; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ it.productName }}</td>
+        <td>{{ it.quantity }}</td>
+        <td>${{ it.unitPrice | number:'1.2-2' }}</td>
+        <td>${{ it.lineTotal | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="total" *ngIf="vm.order">
+    <span>Total</span>
+    <strong>${{ vm.total | number:'1.2-2' }}</strong>
+  </div>
+
+  <ng-template #notFound>
+    <p class="error">Order not found.</p>
+  </ng-template>
+</div>

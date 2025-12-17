@@ -1,1 +1,38 @@
-<p>customer-form works!</p>
+<div class="card">
+  <h2>Add Customer</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label>Name</label>
+      <input type="text" formControlName="name" placeholder="Enter full name" />
+      <small class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        Name is required (min 2 characters).
+      </small>
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Enter email" />
+      <small class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        A valid email is required.
+      </small>
+    </div>
+
+    <div>
+      <label>Phone Number</label>
+      <input type="text" formControlName="phone" placeholder="Enter phone number" />
+      <small class="error" *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid">
+        Phone number is required.
+      </small>
+    </div>
+
+    <div>
+      <label>Company (optional)</label>
+      <input type="text" formControlName="company" placeholder="Enter company name (optional)" />
+    </div>
+
+    <div class="actions-row">
+      <button type="submit">Save Customer</button>
+    </div>
+  </form>
+</div>
