@@ -1,0 +1,40 @@
+<div class="auth-card">
+  <h2>Sign Up</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label>Name</label>
+      <input type="text" formControlName="name" placeholder="Enter your name" />
+      <small class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        Name is required (min 2 chars).
+      </small>
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Enter your email" />
+      <small class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        Valid email is required.
+      </small>
+    </div>
+
+    <div>
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="Create a password" />
+      <small class="error" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+        Password is required (min 6 chars).
+      </small>
+    </div>
+
+    <small class="error" *ngIf="error">{{ error }}</small>
+
+    <button type="submit">Create Account</button>
+  </form>
+
+  <p class="muted">
+    Already have an account?
+    <a routerLink="/login">Login</a>
+  </p>
+</div>
+
+

@@ -1,61 +1,42 @@
-<div class="dashboard" *ngIf="vm$ | async as vm">
-  <h1>Dashboard</h1>
+<div class="container">
+<!-- MAIN CONTENT -->
+<div class="main">
+    <h1>Dashboard</h1>
+    <br>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="label">Products</div>
-      <div class="value">{{ vm.productsCount }}</div>
-    </div>
-    <div class="stat">
-      <div class="label">Customers</div>
-      <div class="value">{{ vm.customersCount }}</div>
-    </div>
-    <div class="stat">
-      <div class="label">Orders</div>
-      <div class="value">{{ vm.ordersCount }}</div>
-    </div>
-    <div class="stat">
-      <div class="label">Sales Today</div>
-      <div class="value">${{ vm.salesToday | number:'1.2-2' }}</div>
-    </div>
-    <div class="stat">
-      <div class="label">Sales This Month</div>
-      <div class="value">${{ vm.salesThisMonth | number:'1.2-2' }}</div>
-    </div>
-  </div>
+    <!-- PRODUCT CARDS -->
+    <div class="cards">
 
-  <div class="grid">
-    <div class="panel">
-      <h2>Most Sold Products</h2>
-      <div class="chart-wrap" *ngIf="vm.topProducts.length; else noSales">
-        <canvas #salesPie></canvas>
-      </div>
-      <ng-template #noSales>
-        <p class="muted">No sales yet — create an order to see the chart.</p>
-      </ng-template>
-    </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/300x150" alt="Product">
+            <h3>Smart Phone</h3>
+            <p>Latest model smartphone with advanced features.</p>
+            <div class="price">$500</div>
+            <button>View Product</button>
+        </div>
 
-    <div class="panel">
-      <h2>Top Products (Qty)</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Product</th>
-            <th>Qty Sold</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let p of vm.topProducts; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ p.name }}</td>
-            <td>{{ p.qty }}</td>
-          </tr>
-          <tr *ngIf="!vm.topProducts.length">
-            <td colspan="3" class="muted">No sales yet.</td>
-          </tr>
-        </tbody>
-      </table>
+        <div class="card">
+            <img src="https://via.placeholder.com/300x150" alt="Product">
+            <h3>Laptop</h3>
+            <p>High performance laptop for work and gaming.</p>
+            <div class="price">$900</div>
+            <button>View Product</button>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x150" alt="Product">
+            <h3>Headphones</h3>
+            <p>Noise cancelling wireless headphones.</p>
+            <div class="price">$120</div>
+            <button>View Product</button>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x150" alt="Product">
+            <h3>Smart Watch</h3>
+            <p>Fitness tracking smart watch.</p>
+            <div class="price">$150</div>
+            <button>Edit Product</button>
+        </div>
     </div>
-  </div>
 </div>

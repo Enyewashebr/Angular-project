@@ -1,7 +1,8 @@
-<div class="sidebar">
+<div class="sidebar" [class.open]="sidebarOpen$ | async">
+  <button class="close-btn" type="button" (click)="ui.closeSidebar()">✕</button>
   <h2 class="logo">Admin Panel</h2>
 
-  <a routerLink="/dashboard" routerLinkActive="active" >
+  <a routerLink="/dashboard" routerLinkActive="active" (click)="ui.closeSidebar()">
     Dashboard
   </a>
 
@@ -13,10 +14,10 @@
     </div>
 
     <div class="submenu" *ngIf="productsOpen">
-      <a routerLink="/products/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/products/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="ui.closeSidebar()">
         Product Form
       </a>
-      <a routerLink="/products/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/products/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="ui.closeSidebar()">
         Product List
       </a>
     </div>
@@ -28,10 +29,10 @@
       <span class="arrow">{{ customersOpen ? '▼' : '▶' }}</span>
     </div>
     <div class="submenu" *ngIf="customersOpen">
-      <a routerLink="/customers/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/customers/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="ui.closeSidebar()">
         Customer Form
       </a>
-      <a routerLink="/customers/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/customers/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="ui.closeSidebar()">
         Customer List
       </a>
     </div>
@@ -43,16 +44,16 @@
       <span class="arrow">{{ ordersOpen ? '▼' : '▶' }}</span>
     </div>
     <div class="submenu" *ngIf="ordersOpen">
-      <a routerLink="/orders/create" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/orders/create" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="ui.closeSidebar()">
         New Order
       </a>
-      <a routerLink="/orders/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/orders/list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="ui.closeSidebar()">
         Orders List
       </a>
     </div>
   </div>
 
-  <a routerLink="/reports" routerLinkActive="active">
+  <a routerLink="/reports" routerLinkActive="active" (click)="ui.closeSidebar()">
     Reports
   </a>
 

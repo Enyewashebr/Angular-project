@@ -33,6 +33,23 @@
   gap: 8px;
 }
 
+.search-row {
+  display: flex;
+  margin: 10px 0 12px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 520px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
 /* Table styling */
 table {
   width: 100%;

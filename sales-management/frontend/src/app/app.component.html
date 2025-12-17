@@ -3,6 +3,7 @@
 
 <div class="layout">
   <app-sidebar></app-sidebar>
+  <div class="backdrop" *ngIf="sidebarOpen$ | async" (click)="ui.closeSidebar()"></div>
 <main class="main">
   <router-outlet></router-outlet>
 </main>

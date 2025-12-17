@@ -1,6 +1,7 @@
 .layout {
   display: flex;
   height: 100vh;
+  position: relative;
 }
 
 app-sidebar {
@@ -10,4 +11,27 @@ app-sidebar {
 main.main {
   flex: 1;
   padding: 20px;
+  overflow: auto;
+}
+
+.backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  app-sidebar {
+    width: 0;
+  }
+
+  main.main {
+    padding: 12px;
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 900;
+  }
 }

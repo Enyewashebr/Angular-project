@@ -1,1 +1,122 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles + responsive helpers */
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --primary: #4f46e5;
+  --info: #3498db;
+  --danger: #e74c3c;
+  --border: #e5e7eb;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Shared UI blocks */
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--info);
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn.primary {
+  background: var(--primary);
+}
+
+.btn.danger {
+  background: var(--danger);
+}
+
+.btn.small {
+  padding: 6px 10px;
+  border-radius: 7px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Tables: responsive via horizontal scroll */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  min-width: 520px;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background: var(--info);
+  color: white;
+}
+
+tr:hover {
+  background: #f1f1f1;
+}
+
+/* Inputs: prevent overflow on mobile */
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 14px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+}

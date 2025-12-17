@@ -1,19 +1,28 @@
 <header>
-        <!-- Logo and Logo Name -->
-        <div class="logo-container">
-            <!-- <img src="logo.png" alt="Logo"> -->
-            <h1>Inventory</h1>
-        </div>
+  <!-- Left: menu + logo -->
+  <div class="left">
+    <button class="menu-btn" type="button" (click)="ui.toggleSidebar()">☰</button>
+    <div class="logo-container">
+      <h1>Inventory</h1>
+    </div>
+  </div>
 
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" placeholder="Search...">
-            <button>Search</button>
-        </div>
+  <!-- Search Bar -->
+  <form class="search-container" (ngSubmit)="search()">
+    <input type="text" name="q" [(ngModel)]="q" placeholder="Search products..." />
+    <button type="submit">Search</button>
+  </form>
 
-        <!-- User Actions -->
-        <div class="user-actions">
-            <button>Login</button>
-            <button class="signup">Sign Up</button>
-        </div>
-    </header>
+  <!-- User Actions -->
+  <div class="user-actions" *ngIf="user$ | async as user; else guest">
+    <span class="user">Hi, {{ user.name }}</span>
+    <button type="button" class="logout" (click)="logout()">Logout</button>
+  </div>
+
+  <ng-template #guest>
+    <div class="user-actions">
+      <a class="link-btn" routerLink="/login">Login</a>
+      <a class="link-btn signup" routerLink="/signup">Sign Up</a>
+    </div>
+  </ng-template>
+</header>

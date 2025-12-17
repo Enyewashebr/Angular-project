@@ -4,6 +4,17 @@
     <a class="btn primary" routerLink="/products/add">Add Product</a>
   </div>
 
+  <div class="search-row" *ngIf="vm$ | async as vm">
+    <input
+      class="search-input"
+      type="text"
+      [value]="vm.q"
+      (input)="updateSearch(($any($event.target).value))"
+      placeholder="Search by product name or category..."
+    />
+  </div>
+
+  <div class="table-wrap">
   <table>
     <thead>
       <tr>
@@ -17,7 +28,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let p of (products$ | async); let i = index">
+      <tr *ngFor="let p of (vm$ | async)?.products; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ p.name }}</td>
         <td>{{ p.category }}</td>
@@ -30,4 +41,5 @@
       </tr>
     </tbody>
   </table>
+  </div>
 </div>
