@@ -10,6 +10,7 @@
       <div class="mode-buttons">
         <button type="button" class="btn small" [class.primary]="vm.mode === 'daily'" (click)="setMode('daily')">Daily</button>
         <button type="button" class="btn small" [class.primary]="vm.mode === 'monthly'" (click)="setMode('monthly')">Monthly</button>
+        <button type="button" class="btn small" [class.primary]="vm.mode === 'yearly'" (click)="setMode('yearly')">Yearly</button>
       </div>
     </div>
 
@@ -22,7 +23,16 @@
       <label class="muted">Month</label>
       <input type="month" [value]="vm.monthKey" (change)="setMonthKey(($any($event.target).value))" />
     </div>
+
+     <div *ngIf="vm.mode === 'yearly'">
+      <label class="muted">Year</label>
+      <input type="number" [value]="vm.yearKey" (change)="setYearKey(($any($event.target).value))" />
+    </div>
   </div>
+
+
+ 
+
 
   <div class="summary">
     <div class="summary-card">

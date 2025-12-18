@@ -14,6 +14,7 @@ export interface Order {
   createdAt: string; // ISO string
   dateKey: string; // local yyyy-mm-dd
   monthKey: string; // local yyyy-mm
+  yearKey: string; // local yyyy-mm
   customerId: number;
   customerName: string;
   customerEmail?: string;
@@ -51,6 +52,12 @@ export function toMonthKey(d: Date): string {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
   return `${y}-${m}`;
+}
+
+export function toYearKey(d: Date): string {
+  // const y = d.getFullYear();
+  const y = String(d.getFullYear() + 1).padStart(2, '0');
+  return `${y}`;
 }
 
 export function aggregateSalesByProduct(orders: Order[]): SalesByProductRow[] {
@@ -116,6 +123,7 @@ export class OrderService {
       createdAt: now.toISOString(),
       dateKey: toDateKey(now),
       monthKey: toMonthKey(now),
+      yearKey: toYearKey(now),
       customerId: payload.customerId,
       customerName: payload.customerName,
       customerEmail: payload.customerEmail,

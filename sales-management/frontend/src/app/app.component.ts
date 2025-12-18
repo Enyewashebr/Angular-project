@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HeaderComponent } from './Header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UiLayoutService } from './ui-layout.service';
+// import { practiceComponent } from './practice/practice.component';
 // import { ProductsComponent } from './features/products/products.component';
 // import { DashboardComponent } from './dashboard/dashboard.component';
 
